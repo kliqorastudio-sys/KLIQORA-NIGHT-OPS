@@ -1,0 +1,4 @@
+Pata por Perto / Lote 05
+Reels: 5
+Renderizacao: GitHub Actions (nuvem)
+Data: 2026-11-24

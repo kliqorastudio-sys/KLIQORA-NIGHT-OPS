@@ -56,7 +56,7 @@ REELS=[
     "A PRESSA PODE CONFUNDIR."
    ],
    [
-    18516731,
+    5481765,
     4,
     "REGISTRE E CONFIRA.",
     "INFORMAÇÃO TEM VALOR."

@@ -19,6 +19,8 @@ jobs:
       - name: Prepare editor in cloud runner
         run: |
           python -m pip install -q requests Pillow
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
           ffmpeg -version | head -1
       - name: Render and validate three Reels
         run: python pata-reels/render.py

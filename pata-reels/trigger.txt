@@ -1,5 +1,0 @@
-PATA-POR-PERTO
-batch=2026-11-24
-reels=3
-engine=cloud-github-actions
-retry=2_ffmpeg

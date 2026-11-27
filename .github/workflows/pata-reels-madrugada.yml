@@ -1,0 +1,38 @@
+name: Pata por Perto — Reels Educativos 27 Nov
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'pata-reels/madrugada-trigger.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Prepare cloud video environment
+        run: |
+          python -m pip install -q requests Pillow
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+      - name: Render three educational reels and QA
+        run: python pata-reels/render_madrugada.py
+      - name: Release final files
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view pata-educativos-20261127 >/dev/null 2>&1 || gh release create pata-educativos-20261127 --title 'Pata por Perto — Reels Educativos 27/11' --notes '3 reels educativos com imagens ilustrativas Pexels e trilhas Mixkit licenciadas. Nao representam resgates reais.'
+          gh release upload pata-educativos-20261127 pata-reels/dist_madrugada/* --clobber
+      - name: Preserve QA artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pata-educativos-27nov-qa
+          path: pata-reels/dist_madrugada/
+          if-no-files-found: ignore
